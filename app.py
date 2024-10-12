@@ -9,6 +9,17 @@ from scrapingFunctions import (
     nomes_times_br_2024
 )
 
+# Função para carregar DataFrames atualizados com cache
+@st.cache(ttl=3600)  # Cache por 1 hora
+def carregar_dataframes():
+    salvar_dataframes_partidas_timesbr_2024(urls_br_2024, nomes_times_br_2024)
+    dfs = []
+    for nome_time in nomes_times_br_2024:
+        caminho_arquivo = f'Temporada {nome_time} 2024.csv'  # Nome do arquivo salvo na pasta
+        df = pd.read_csv(caminho_arquivo)
+        dfs.append(df)
+    return dfs
+
 # Carregar os DataFrames atualizados
 dataframes_times_br_2024 = carregar_dataframes()
 
@@ -26,5 +37,6 @@ st.subheader(
 time_selecionado = st.selectbox("Selecione o time", nomes_times_br_2024)
 df_selecionado = dataframes_times_br_2024[nomes_times_br_2024.index(time_selecionado)]
 
+# Exibir DataFrame do time selecionado
 st.write(f"Dados para o time: {time_selecionado}")
 st.dataframe(df_selecionado)
