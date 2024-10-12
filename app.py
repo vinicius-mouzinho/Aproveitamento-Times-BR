@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os
-from scrapingFunctions import gerar_tabela_times_brasileiros
+
+
 
 # Lista de nomes dos times
 nomes_times_br_2024 = [
@@ -10,11 +11,11 @@ nomes_times_br_2024 = [
     "Vitória", "Corinthians", "Fluminense", "Cuiabá", "Atlético-GO"
 ]
 
-# Função para carregar DataFrames atualizados sem scraping
+# Função para carregar DataFrames a partir dos arquivos CSV na pasta local do projeto
 def carregar_dataframes():
     dfs = []
     for nome_time in nomes_times_br_2024:
-        caminho_arquivo = fr'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada {nome_time} 2024.csv'
+        caminho_arquivo = f'data/Temporada {nome_time} 2024.csv'  # Assumindo que você tenha uma pasta "data" no projeto
         
         # Verificar se o arquivo existe
         if os.path.exists(caminho_arquivo):
@@ -24,6 +25,81 @@ def carregar_dataframes():
             st.error(f"Arquivo {caminho_arquivo} não encontrado.")
     return dfs
 
+def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, data_final=None, campeonatos_escolhidos=None, apenas_jogos_casa=None, apenas_jogos_visitante=None):
+    # Criação de uma lista para armazenar os resultados
+    resultados = []
+
+    # Loop para processar cada DataFrame e calcular as estatísticas
+    for df, time in zip(dataframes, nomes_times):
+        # Filtrar pelos campeonatos escolhidos, se fornecidos
+        if campeonatos_escolhidos:
+            if isinstance(campeonatos_escolhidos, list):
+                df = df[df['Campeonato'].isin(campeonatos_escolhidos)].copy()
+            else:
+                df = df[df['Campeonato'] == campeonatos_escolhidos].copy()
+
+        # Converter a coluna de data para o formato datetime e filtrar por datas, se fornecidas
+        df['Data'] = pd.to_datetime(df['Data'].str[4:], format='%d/%m/%y')
+        
+        if data_inicial:
+            data_inicial = pd.to_datetime(data_inicial, format='%d.%m.%y')
+            df = df[df['Data'] >= data_inicial]
+        if data_final:
+            data_final = pd.to_datetime(data_final, format='%d.%m.%y')
+            df = df[df['Data'] <= data_final]
+
+        # Filtrar apenas jogos em casa, se solicitado
+        if apenas_jogos_casa:
+            df = df[df['Time da casa'] == time]
+        
+        # Filtrar apenas jogos como visitante, se solicitado
+        if apenas_jogos_visitante:
+            df = df[df['Time visitante'] == time]
+
+        # Contagem de gols marcados
+        gols_casa = df[df['Time da casa'] == time]['Gols Casa'].sum()
+        gols_visitante = df[df['Time visitante'] == time]['Gols Visitante'].sum()
+        total_gols_marcados = gols_casa + gols_visitante
+
+        # Contagem de gols sofridos
+        gols_sofridos_casa = df[df['Time da casa'] == time]['Gols Visitante'].sum()
+        gols_sofridos_visitante = df[df['Time visitante'] == time]['Gols Casa'].sum()
+        total_gols_sofridos = gols_sofridos_casa + gols_sofridos_visitante
+
+        # Contagem de vitórias
+        vitorias = len(df[df['Nome Time Vitorioso'] == time])
+
+        # Contagem de empates
+        empates = len(df[df['Nome Time Vitorioso'] == 'Empate'])
+
+        # Contagem de derrotas
+        derrotas = len(df) - (vitorias + empates)  # Total de jogos - (vitórias + empates)
+
+        # Contagem de partidas
+        partidas = len(df)
+
+        # Cálculo do aproveitamento (percentual)
+        pontos = (vitorias * 3) + (empates * 1)
+        aproveitamento = (pontos / (partidas * 3)) * 100 if partidas > 0 else 0
+
+        # Adicionar os resultados à lista de resultados
+        resultados.append({
+            'Time': time,
+            'Partidas': partidas,
+            'Vitórias': vitorias,
+            'Empates': empates,
+            'Derrotas': derrotas,
+            'Gols Marcados': total_gols_marcados,
+            'Gols Sofridos': total_gols_sofridos,
+            'Pontos': pontos,
+            'Aproveitamento (%)': round(aproveitamento, 2)  # Arredondar para 2 casas decimais
+        })
+
+    # Criar o DataFrame final a partir da lista de resultados
+    tabela_final = pd.DataFrame(resultados)
+
+    return tabela_final
+
 # Carregar os DataFrames atualizados
 dataframes_times_br_2024 = carregar_dataframes()
 
@@ -32,7 +108,8 @@ st.title("Aplicativo de análise da Temporada das Equipes - Futebol Brasileiro")
 
 st.subheader(
     """
-    Veja todos os jogos da temporada de uma equipe ou uma tabela de aproveitamento geral com filtros e classificação por métrica disponíveis!
+    Aqui, você pode ver todos os jogos da temporada de uma equipe, além de uma tabela de aproveitamento com informações de gols, 
+    gols sofridos, vitórias, derrotas, empates e aproveitamento filtrado por data, mando de campo ou campeonato.
     """
 )
 
