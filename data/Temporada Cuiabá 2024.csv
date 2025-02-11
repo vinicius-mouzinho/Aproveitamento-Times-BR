@@ -1,9 +1,9 @@
 Campeonato,Data,Time da casa,Time visitante,Formação,Técnico,Resultado,Gols Casa,Gols Visitante,Nome Time Vitorioso
-Campeonato Mato-Grossense,sáb 20/01/24,Cuiabá,Primavera-MT,?,Toni Oliveira,1:1,1,1,Empate
-Campeonato Mato-Grossense,ter 23/01/24,Operário VG,Cuiabá,?,Toni Oliveira,2:2,2,2,Empate
-Campeonato Mato-Grossense,sáb 27/01/24,Cuiabá,Dom Bosco,?,Toni Oliveira,5:0,5,0,Cuiabá
-Campeonato Mato-Grossense,qui 01/02/24,Luverdense,Cuiabá,?,Toni Oliveira,1:2,1,2,Cuiabá
-Campeonato Mato-Grossense,seg 05/02/24,Mixto,Cuiabá,?,Toni Oliveira,1:2,1,2,Cuiabá
+Campeonato Mato-Grossense,sáb 20/01/24,Cuiabá,Primavera-MT,?,Antonio Oliveira,1:1,1,1,Empate
+Campeonato Mato-Grossense,ter 23/01/24,Operário VG,Cuiabá,?,Antonio Oliveira,2:2,2,2,Empate
+Campeonato Mato-Grossense,sáb 27/01/24,Cuiabá,Dom Bosco,?,Antonio Oliveira,5:0,5,0,Cuiabá
+Campeonato Mato-Grossense,qui 01/02/24,Luverdense,Cuiabá,?,Antonio Oliveira,1:2,1,2,Cuiabá
+Campeonato Mato-Grossense,seg 05/02/24,Mixto,Cuiabá,?,Antonio Oliveira,1:2,1,2,Cuiabá
 Campeonato Mato-Grossense,qui 08/02/24,Cuiabá,U. Rondonópolis,?,Luiz Fernando Iubel,1:1,1,1,Empate
 Campeonato Mato-Grossense,qui 15/02/24,Cuiabá,AA Araguaia,?,Luiz Fernando Iubel,3:0,3,0,Cuiabá
 Campeonato Mato-Grossense,dom 18/02/24,Academia-MT,Cuiabá,?,Luiz Fernando Iubel,0:2,0,2,Cuiabá
@@ -27,7 +27,7 @@ Campeonato Brasileiro Série A,sáb 27/04/24,Cuiabá,Atlético-MG,5-4-1 plano,Lu
 Copa do Brasil,qui 02/05/24,Goiás,Cuiabá,5-4-1 plano,Ricardo Colbachini,1:0,1,0,Goiás
 Campeonato Brasileiro Série A,dom 05/05/24,Cuiabá,Palmeiras,3-4-1-2,Ricardo Colbachini,0:2,0,2,Palmeiras
 Copa Sul-Americana,qua 08/05/24,Cuiabá,Metropolitanos,4-3-3 ofensivo,Petit,3:0,3,0,Cuiabá
-Copa Verde,sáb 11/05/24,Cuiabá,Vila Nova,,Petit,4:2,4,2,Cuiabá
+Copa Verde,sáb 11/05/24,Cuiabá,Vila Nova,4-2-3-1,Petit,4:2,4,2,Cuiabá
 Copa Sul-Americana,qua 15/05/24,Cuiabá,Dep. Garcilaso,4-3-3 ofensivo,Petit,1:1,1,1,Empate
 Copa do Brasil,qui 23/05/24,Cuiabá,Goiás,4-3-3 ofensivo,Petit,1:0,1,0,Cuiabá
 Copa Sul-Americana,qua 29/05/24,Lanús,Cuiabá,4-3-3 ofensivo,Petit,0:1,0,1,Cuiabá

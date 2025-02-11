@@ -33,7 +33,7 @@ def obter_gols_tempo_normal(driver, url_jogo):
             else:
                 return "Erro"
 
-def salvar_dataframes_partidas_timesbr_2024(urls, nomes_times):
+def salvar_dataframes_partidas_timesbr_2025(urls, nomes_times):
     # Configuração do Selenium para usar o Chrome
     service = Service(executable_path='C:/Users/chromedriver.exe')
     driver = webdriver.Chrome(service=service)
@@ -172,7 +172,7 @@ def salvar_dataframes_partidas_timesbr_2024(urls, nomes_times):
 
             # Manter a coluna 'Resultado'
             # Salvar o DataFrame em um arquivo CSV na pasta especificada
-            caminho_arquivo = fr'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada {nome_time} 2024.csv'
+            caminho_arquivo = fr'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada {nome_time} 2025.csv'
             df.to_csv(caminho_arquivo, index=False)
             print(f"DataFrame do time {nome_time} salvo em: {caminho_arquivo}")
         else:
@@ -263,7 +263,7 @@ def obter_tabela_rodada_com_selenium(rodada):
 
     tabelas = []
 
-    for ano_base in range(2003, 2024):
+    for ano_base in range(2003, 2025):
         # Ajuste do saison_id (ano_base) para que corresponda à temporada correta
         saison_id = ano_base - 1  # saison_id sempre será um ano antes da temporada real
 
@@ -317,54 +317,55 @@ def obter_tabela_rodada_com_selenium(rodada):
     return tabela_final
 
 
-urls_br_2024 = [
-    "https://www.transfermarkt.com.br/fortaleza-ec/spielplandatum/verein/10870/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/botafogo-fr/spielplandatum/verein/537/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/cr-flamengo/spielplandatum/verein/614/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/se-palmeiras/spielplandatum/verein/1023/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/sao-paulo-fc/spielplandatum/verein/585/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/cruzeiro-ec/spielplandatum/verein/609/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/ec-bahia/spielplandatum/verein/10010/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/athletico-paranaense/spielplandatum/verein/679/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/atletico-mineiro/spielplandatum/verein/330/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/cr-vasco-da-gama/spielplandatum/verein/978/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/rb-bragantino/spielplandatum/verein/8793/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/sc-internacional/spielplandatum/verein/6600/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/ec-juventude/spielplandatum/verein/10492/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/gremio-fbpa/spielplandatum/verein/210/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/criciuma-ec/spielplandatum/verein/7178/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/ec-vitoria/spielplandatum/verein/2125/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/sc-corinthians/spielplandatum/verein/199/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/fluminense-fc/spielplandatum/verein/2462/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/cuiaba-ec/spielplandatum/verein/28022/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
-    "https://www.transfermarkt.com.br/atletico-goianiense/spielplandatum/verein/15172/saison_id/2023/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1"
-]
-nomes_times_br_2024 = [
-    "Fortaleza", "Botafogo", "Flamengo", "Palmeiras", "São Paulo", "Cruzeiro", "Bahia", "Athletico-PR", "Atlético-MG", "Vasco da Gama",
-    "Bragantino", "Internacional", "Juventude", "Grêmio", "Criciúma", "Vitória", "Corinthians", "Fluminense", "Cuiabá", "Atlético-GO"
+urls_br_2025 = [
+    "https://www.transfermarkt.com.br/fortaleza-ec/spielplandatum/verein/10870/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/botafogo-fr/spielplandatum/verein/537/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/cr-flamengo/spielplandatum/verein/614/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/se-palmeiras/spielplandatum/verein/1023/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/sao-paulo-fc/spielplandatum/verein/585/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/cruzeiro-ec/spielplandatum/verein/609/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/ec-bahia/spielplandatum/verein/10010/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/atletico-mineiro/spielplandatum/verein/330/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/cr-vasco-da-gama/spielplandatum/verein/978/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/rb-bragantino/spielplandatum/verein/8793/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/sc-internacional/spielplandatum/verein/6600/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/ec-juventude/spielplandatum/verein/10492/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/gremio-fbpa/spielplandatum/verein/210/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/ec-vitoria/spielplandatum/verein/2125/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/sc-corinthians/spielplandatum/verein/199/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/fluminense-fc/spielplandatum/verein/2462/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/santos-fc/spielplandatum/verein/221/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/ceara-sc/spielplandatum/verein/2029/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/sport-recife/spielplandatum/verein/8718/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1",
+    "https://www.transfermarkt.com.br/mirassol-fc/spielplandatum/verein/3876/saison_id/2024/wettbewerb_id//datum_von/0000-00-00/datum_bis/0000-00-00/day/0/plus/1"
 ]
 
-df_fortaleza = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Fortaleza 2024.csv')
-df_botafogo = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Botafogo 2024.csv')
-df_flamengo = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Flamengo 2024.csv')
-df_palmeiras = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Palmeiras 2024.csv')
-df_sao_paulo = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada São Paulo 2024.csv')
-df_cruzeiro = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Cruzeiro 2024.csv')
-df_bahia = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Bahia 2024.csv')
-df_athletico_pr = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Athletico-PR 2024.csv')
-df_atletico_mg = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Atlético-MG 2024.csv')
-df_vasco_da_gama = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Vasco da Gama 2024.csv')
-df_bragantino = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Bragantino 2024.csv')
-df_internacional = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Internacional 2024.csv')
-df_juventude = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Juventude 2024.csv')
-df_gremio = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Grêmio 2024.csv')
-df_criciuma = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Criciúma 2024.csv')
-df_vitoria = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Vitória 2024.csv')
-df_corinthians = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Corinthians 2024.csv')
-df_fluminense = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Fluminense 2024.csv')
-df_cuiaba = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Cuiabá 2024.csv')
-df_atletico_go = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2024\Temporada Atlético-GO 2024.csv')
+nomes_times_br_2025 = [
+    "Fortaleza", "Botafogo", "Flamengo", "Palmeiras", "São Paulo", "Cruzeiro", "Bahia", "Atlético-MG", "Vasco da Gama",
+    "Bragantino", "Internacional", "Juventude", "Grêmio", "Vitória", "Corinthians", "Fluminense", "Santos", "Ceará", "Sport", "Mirassol"
+]
 
-dataframes_times_br_2024 = [df_fortaleza, df_botafogo, df_flamengo, df_palmeiras, df_sao_paulo, df_cruzeiro, df_bahia, df_athletico_pr,
-              df_atletico_mg, df_vasco_da_gama, df_bragantino, df_internacional, df_juventude, df_gremio, df_criciuma,
-              df_vitoria, df_corinthians, df_fluminense, df_cuiaba, df_atletico_go]  # Lista de DataFrames dos times
+df_fortaleza = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Fortaleza 2025.csv')
+df_botafogo = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Botafogo 2025.csv')
+df_flamengo = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Flamengo 2025.csv')
+df_palmeiras = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Palmeiras 2025.csv')
+df_sao_paulo = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada São Paulo 2025.csv')
+df_cruzeiro = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Cruzeiro 2025.csv')
+df_bahia = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Bahia 2025.csv')
+df_atletico_mg = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Atlético-MG 2025.csv')
+df_vasco_da_gama = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Vasco da Gama 2025.csv')
+df_bragantino = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Bragantino 2025.csv')
+df_internacional = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Internacional 2025.csv')
+df_juventude = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Juventude 2025.csv')
+df_gremio = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Grêmio 2025.csv')
+df_vitoria = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Vitória 2025.csv')
+df_corinthians = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Corinthians 2025.csv')
+df_fluminense = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Fluminense 2025.csv')
+df_santos = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Santos 2025.csv')
+df_ceara = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Ceará 2025.csv')
+df_sport = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Sport 2025.csv')
+df_mirassol = pd.read_csv(r'C:\Users\Anderson\Football Analytics Docs\Temporada Times Brasileiros 2025\Temporada Mirassol 2025.csv')
+
+dataframes_times_br_2025 = [df_fortaleza, df_botafogo, df_flamengo, df_palmeiras, df_sao_paulo, df_cruzeiro, df_bahia,
+              df_atletico_mg, df_vasco_da_gama, df_bragantino, df_internacional, df_juventude, df_gremio,
+              df_vitoria, df_corinthians, df_fluminense, df_santos, df_ceara, df_sport, df_mirassol]  # Lista de DataFrames dos times

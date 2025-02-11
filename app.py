@@ -2,20 +2,17 @@ import streamlit as st
 import pandas as pd
 import os
 
-
-
 # Lista de nomes dos times
-nomes_times_br_2024 = [
-    "Fortaleza", "Botafogo", "Flamengo", "Palmeiras", "São Paulo", "Cruzeiro", "Bahia", "Athletico-PR", 
-    "Atlético-MG", "Vasco da Gama", "Bragantino", "Internacional", "Juventude", "Grêmio", "Criciúma",
-    "Vitória", "Corinthians", "Fluminense", "Cuiabá", "Atlético-GO"
+nomes_times_br_2025 = [
+    "Fortaleza", "Botafogo", "Flamengo", "Palmeiras", "São Paulo", "Cruzeiro", "Bahia", "Atlético-MG", "Vasco da Gama",
+    "Bragantino", "Internacional", "Juventude", "Grêmio", "Vitória", "Corinthians", "Fluminense", "Santos", "Ceará", "Sport", "Mirassol"
 ]
 
 # Função para carregar DataFrames a partir dos arquivos CSV na pasta local do projeto
 def carregar_dataframes():
     dfs = []
-    for nome_time in nomes_times_br_2024:
-        caminho_arquivo = f'data/Temporada {nome_time} 2024.csv'  # Assumindo que você tenha uma pasta "data" no projeto
+    for nome_time in nomes_times_br_2025:
+        caminho_arquivo = f'data/Temporada {nome_time} 2025.csv'  # Assumindo que você tenha uma pasta "data" no projeto
         
         # Verificar se o arquivo existe
         if os.path.exists(caminho_arquivo):
@@ -101,7 +98,7 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
     return tabela_final
 
 # Carregar os DataFrames atualizados
-dataframes_times_br_2024 = carregar_dataframes()
+dataframes_times_br_2025 = carregar_dataframes()
 
 # Interface do app Streamlit
 st.title("Aplicativo de análise da Temporada das Equipes - Futebol Brasileiro")
@@ -114,8 +111,8 @@ st.subheader(
 )
 
 # Exibir DataFrame de qualquer time (opcional)
-time_selecionado = st.selectbox("Selecione o time para visualizar os jogos completos", nomes_times_br_2024)
-df_selecionado = dataframes_times_br_2024[nomes_times_br_2024.index(time_selecionado)]
+time_selecionado = st.selectbox("Selecione o time para visualizar os jogos completos", nomes_times_br_2025)
+df_selecionado = dataframes_times_br_2025[nomes_times_br_2025.index(time_selecionado)]
 
 st.write(f"Dados para o time: {time_selecionado}")
 st.dataframe(df_selecionado)
@@ -124,11 +121,11 @@ st.dataframe(df_selecionado)
 st.header("Tabela de Aproveitamento")
 
 # Data inicial e final
-data_inicial = st.date_input("Data Inicial", value=pd.to_datetime("2024-01-01"))
-data_final = st.date_input("Data Final", value=pd.to_datetime("2024-12-31"))
+data_inicial = st.date_input("Data Inicial", value=pd.to_datetime("2025-01-01"))
+data_final = st.date_input("Data Final", value=pd.to_datetime("2025-12-31"))
 
 # Seleção de campeonatos (com opção para selecionar todos)
-campeonatos = pd.concat(dataframes_times_br_2024)['Campeonato'].unique()  # Pega campeonatos de todos os times
+campeonatos = pd.concat(dataframes_times_br_2025)['Campeonato'].unique()  # Pega campeonatos de todos os times
 escolher_todos_campeonatos = st.checkbox("Selecionar todos os Campeonatos")
 
 if escolher_todos_campeonatos:
@@ -145,8 +142,8 @@ if st.button("Gerar Tabela de Aproveitamento"):
     # Verificar se a lista de campeonatos não está vazia
     if len(campeonatos_escolhidos) > 0:
         tabela_aproveitamento = gerar_tabela_times_brasileiros(
-            dataframes_times_br_2024,  # Todos os DataFrames dos times
-            nomes_times_br_2024,  # Lista de todos os times
+            dataframes_times_br_2025,  # Todos os DataFrames dos times
+            nomes_times_br_2025,  # Lista de todos os times
             data_inicial=data_inicial.strftime('%d.%m.%y'),
             data_final=data_final.strftime('%d.%m.%y'),
             campeonatos_escolhidos=campeonatos_escolhidos,
