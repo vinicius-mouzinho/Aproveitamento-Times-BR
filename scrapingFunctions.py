@@ -238,6 +238,10 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
         pontos = (vitorias * 3) + (empates * 1)
         aproveitamento = (pontos / (partidas * 3)) * 100 if partidas > 0 else 0
 
+        # Cálculo dos gols marcados e sofridos por partida
+        gols_marcados_por_partida = total_gols_marcados / partidas if partidas > 0 else 0
+        gols_sofridos_por_partida = total_gols_sofridos / partidas if partidas > 0 else 0
+
         # Adicionar os resultados à lista de resultados
         resultados.append({
             'Time': time,
@@ -247,6 +251,8 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
             'Derrotas': derrotas,
             'Gols Marcados': total_gols_marcados,
             'Gols Sofridos': total_gols_sofridos,
+            'Gols Marcados por Partida': round(gols_marcados_por_partida, 2),
+            'Gols Sofridos por Partida': round(gols_sofridos_por_partida, 2),
             'Pontos': pontos,
             'Aproveitamento (%)': round(aproveitamento, 2)  # Arredondar para 2 casas decimais
         })
