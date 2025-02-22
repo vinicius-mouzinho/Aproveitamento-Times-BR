@@ -82,6 +82,16 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
         # Cálculo dos gols marcados e sofridos por partida
         gols_marcados_por_partida = total_gols_marcados / partidas if partidas > 0 else 0
         gols_sofridos_por_partida = total_gols_sofridos / partidas if partidas > 0 else 0
+        
+        # Cálculo da sequência invicta
+        sequencia_invicta = 0
+        contador = 0
+        for index, row in df.iterrows():
+            if row['Nome Time Vitorioso'] == time or row['Nome Time Vitorioso'] == 'Empate':
+                contador += 1
+            else:
+                contador = 0
+            sequencia_invicta = contador
 
         # Adicionar os resultados à lista de resultados
         resultados.append({
@@ -95,7 +105,8 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
             'Gols Marcados por Partida': round(gols_marcados_por_partida, 2),
             'Gols Sofridos por Partida': round(gols_sofridos_por_partida, 2),
             'Pontos': pontos,
-            'Aproveitamento (%)': round(aproveitamento, 2)  # Arredondar para 2 casas decimais
+            'Aproveitamento (%)': round(aproveitamento, 2),  # Arredondar para 2 casas decimais
+            'Sequência Invicta': sequencia_invicta
         })
 
     # Criar o DataFrame final a partir da lista de resultados
