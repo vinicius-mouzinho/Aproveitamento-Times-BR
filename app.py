@@ -93,6 +93,17 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
                 contador = 0
             sequencia_invicta = contador
 
+        jogos_sem_sofrer_gols = 0
+        contador_jsg = 0
+        for index, row in df.iterrows():
+            if row['Time da Casa'] == time:
+                if row['Gols Visitante'] == 0:
+                    contador_jsg += 1
+            else:
+                if row['Gols Casa'] == 0:
+                    contador_jsg += 1
+            jogos_sem_sofrer_gols = contador_jsg
+
         # Adicionar os resultados à lista de resultados
         resultados.append({
             'Time': time,
@@ -106,7 +117,8 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
             'Gols Sofridos por Partida': round(gols_sofridos_por_partida, 2),
             'Pontos': pontos,
             'Aproveitamento (%)': round(aproveitamento, 2),  # Arredondar para 2 casas decimais
-            'Sequência Invicta': sequencia_invicta
+            'Sequência Invicta': sequencia_invicta,
+            'Jogos sem sofrer gol': jogos_sem_sofrer_gols
         })
 
     # Criar o DataFrame final a partir da lista de resultados
