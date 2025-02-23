@@ -96,7 +96,7 @@ def gerar_tabela_times_brasileiros(dataframes, nomes_times, data_inicial=None, d
         jogos_sem_sofrer_gols = 0
         contador_jsg = 0
         for index, row in df.iterrows():
-            if row['Time da Casa'] == time:
+            if row['Time da casa'] == time:
                 if row['Gols Visitante'] == 0:
                     contador_jsg += 1
             else:
